@@ -60,6 +60,8 @@ python -m pip install -e .
 python -m playwright install chromium
 ```
 
+For local development you can also create a `.env` file in the repo root. A starter template is available in [`.env.example`](.env.example).
+
 Optional environment variables:
 
 ```bash

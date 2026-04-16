@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 from dataclasses import dataclass
 
+from dotenv import load_dotenv
+
 
 def _to_bool(value: str | None, default: bool) -> bool:
     if value is None:
@@ -42,6 +44,7 @@ class Settings:
 
     @classmethod
     def from_env(cls) -> "Settings":
+        load_dotenv()
         artifact_dir = Path(os.getenv("ARTIFACT_DIR", "artifacts"))
         return cls(
             web_base_url=os.getenv("WEB_BASE_URL", "http://localhost:3000"),
