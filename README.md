@@ -160,7 +160,7 @@ powershell -ExecutionPolicy Bypass -File .\run-tests.ps1 -EvidenceMode always -H
   - `evidence_mode`: `on_failure` or `always`
 - When the workflow produces Allure results, it:
   - uploads the static Allure HTML report as an artifact
-  - deploys the latest report to GitHub Pages
+  - publishes the latest report to the `gh-pages` branch at the site root
   - writes the Pages URL into the run summary
 
 ## Reporting
@@ -192,7 +192,7 @@ allure open artifacts\allure-report
 - The verified full-suite result is `2 passed, 1 xfailed`.
 - The UI shows `Awaiting User Verification` for the backend status `REMEDIATED_WAITING_FOR_CUSTOMER`, so the UI test verifies the backend state and the user-facing label separately.
 - `pytest.ini` disables the cache provider to avoid a Windows workspace permission warning during verified runs.
-- GitHub Actions is configured to pull the published app images from GHCR, run the full suite, generate a static Allure HTML report, and upload the report artifact.
+- GitHub Actions is configured to pull the published app images from GHCR, run the full suite, generate a static Allure HTML report, upload the report artifact, and publish the latest report to the `gh-pages` branch.
 - If the GHCR packages remain private, the repository must have permission to read them with `GITHUB_TOKEN`, or the workflow login step must be adjusted.
 - Username and password can be moved to GitHub Secrets; image names and URLs are better kept as GitHub Variables rather than hardcoded workflow values.
 

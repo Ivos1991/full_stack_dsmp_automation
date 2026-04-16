@@ -34,10 +34,8 @@ on:
           - always
 
 permissions:
-  contents: read
+  contents: write
   packages: read
-  pages: write
-  id-token: write
 
 jobs:
   test-run:
@@ -58,10 +56,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Configure Pages
-        if: always()
-        uses: actions/configure-pages@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -153,12 +147,6 @@ jobs:
           if-no-files-found: error
           path: artifacts/allure-report/
 
-      - name: Upload Pages artifact
-        if: always() && steps.detect_allure_results.outputs.has_results == 'true'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: artifacts/allure-report/
-
       - name: Upload raw test artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -190,13 +178,23 @@ jobs:
     if: always() && needs.test-run.outputs.has_allure_results == 'true' && (github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main')
     needs: test-run
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy_to_pages.outputs.page_url }}
     steps:
-      - name: Deploy report to GitHub Pages
-        id: deploy_to_pages
-        uses: actions/deploy-pages@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Allure HTML report
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-html-report-${{ github.event.inputs.run_type || 'e2e' }}
+          path: artifacts/allure-report
+
+      - name: Publish report to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: artifacts/allure-report
+          force_orphan: true
 
       - name: Publish CI summary
         run: |
@@ -207,7 +205,7 @@ jobs:
             echo "- Workers: \`${{ github.event.inputs.workers || '1' }}\`"
             echo "- Evidence mode: \`${{ github.event.inputs.evidence_mode || vars.BROWSER_EVIDENCE_MODE || 'on_failure' }}\`"
             echo "- Static Allure report artifact: [allure-html-report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)"
-            echo "- GitHub Pages report: ${{ steps.deploy_to_pages.outputs.page_url }}"
+            echo "- GitHub Pages report: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
             echo "- Application image: \`${{ vars.API_IMAGE || 'ghcr.io/ivos1991/platform-home-assignment-api:assignment-one' }}\`"
             echo "- Web image: \`${{ vars.WEB_IMAGE || 'ghcr.io/ivos1991/platform-home-assignment-web:assignment-one' }}\`"
           } >> "$GITHUB_STEP_SUMMARY"
