@@ -1,0 +1,15 @@
+.idea/
+.venv/
+__pycache__/
+.pytest_cache/
+.playwright/
+artifacts/
+allure-report/
+allure-results/
+docker-logs/
+full_stack_automation_cyera.egg-info/
+pytest-cache-files-*/
+*.pyc
+*.pyo
+*.pyd
+.env

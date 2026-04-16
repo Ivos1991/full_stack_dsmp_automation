@@ -1,0 +1,59 @@
+import os
+from pathlib import Path
+from dataclasses import dataclass
+
+
+def _to_bool(value: str | None, default: bool) -> bool:
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+@dataclass
+class Settings:
+    web_base_url: str
+    api_base_url: str
+    username: str
+    password: str
+    request_timeout_seconds: float
+    poll_timeout_seconds: float
+    poll_interval_seconds: float
+    headless: bool
+    slow_mo_ms: int
+    browser_evidence_mode: str
+    artifact_dir: Path
+    log_level: str
+
+    @property
+    def allure_results_dir(self) -> Path:
+        return self.artifact_dir / "allure-results"
+
+    @property
+    def log_dir(self) -> Path:
+        return self.artifact_dir / "logs"
+
+    @property
+    def allure_report_dir(self) -> Path:
+        return self.artifact_dir / "allure-report"
+
+    @property
+    def playwright_output_dir(self) -> Path:
+        return self.artifact_dir / "playwright"
+
+    @classmethod
+    def from_env(cls) -> "Settings":
+        artifact_dir = Path(os.getenv("ARTIFACT_DIR", "artifacts"))
+        return cls(
+            web_base_url=os.getenv("WEB_BASE_URL", "http://localhost:3000"),
+            api_base_url=os.getenv("API_BASE_URL", "http://localhost:8080/api"),
+            username=os.getenv("APP_USERNAME", "admin"),
+            password=os.getenv("APP_PASSWORD", "Aa123456"),
+            request_timeout_seconds=float(os.getenv("REQUEST_TIMEOUT_SECONDS", "20")),
+            poll_timeout_seconds=float(os.getenv("POLL_TIMEOUT_SECONDS", "180")),
+            poll_interval_seconds=float(os.getenv("POLL_INTERVAL_SECONDS", "2")),
+            headless=_to_bool(os.getenv("HEADLESS"), True),
+            slow_mo_ms=int(os.getenv("SLOW_MO_MS", "0")),
+            browser_evidence_mode=os.getenv("BROWSER_EVIDENCE_MODE", "on_failure").strip().lower(),
+            artifact_dir=artifact_dir,
+            log_level=os.getenv("LOG_LEVEL", "INFO").upper(),
+        )

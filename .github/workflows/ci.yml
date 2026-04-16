@@ -1,0 +1,141 @@
+name: PR Checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    env:
+      API_IMAGE: ${{ vars.API_IMAGE || 'ghcr.io/ivos1991/platform-home-assignment-api:assignment-one' }}
+      WEB_IMAGE: ${{ vars.WEB_IMAGE || 'ghcr.io/ivos1991/platform-home-assignment-web:assignment-one' }}
+      WEB_BASE_URL: ${{ vars.WEB_BASE_URL || 'http://localhost:3000' }}
+      API_BASE_URL: ${{ vars.API_BASE_URL || 'http://localhost:8080/api' }}
+      APP_USERNAME: ${{ secrets.APP_USERNAME || 'admin' }}
+      APP_PASSWORD: ${{ secrets.APP_PASSWORD || 'Aa123456' }}
+      BROWSER_EVIDENCE_MODE: ${{ vars.BROWSER_EVIDENCE_MODE || 'on_failure' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Install Playwright browser
+        run: python -m playwright install --with-deps chromium
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Start application stack
+        run: docker compose -f .github/docker-compose.e2e.yml up -d
+
+      - name: Wait for application readiness
+        run: |
+          for attempt in {1..30}; do
+            if curl --fail --silent http://localhost:8080/api/health >/tmp/api-health.json && curl --fail --silent http://localhost:3000 >/tmp/web-health.html; then
+              cat /tmp/api-health.json
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Application failed readiness checks" >&2
+          docker compose -f .github/docker-compose.e2e.yml ps
+          docker compose -f .github/docker-compose.e2e.yml logs
+          exit 1
+
+      - name: Run end-to-end suite
+        run: python -m pytest -q -rs --alluredir artifacts/allure-results
+
+      - name: Detect Allure results
+        if: always()
+        id: detect_allure_results
+        run: |
+          if [ -d artifacts/allure-results ] && [ "$(find artifacts/allure-results -type f | head -n 1)" ]; then
+            echo "has_results=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_results=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Allure CLI
+        if: always() && steps.detect_allure_results.outputs.has_results == 'true'
+        run: npm install -g allure-commandline
+
+      - name: Generate Allure report
+        if: always() && steps.detect_allure_results.outputs.has_results == 'true'
+        run: allure generate artifacts/allure-results --clean -o artifacts/allure-report
+
+      - name: Upload Allure HTML report
+        if: always() && steps.detect_allure_results.outputs.has_results == 'true'
+        id: upload_allure_report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-html-report
+          if-no-files-found: error
+          path: artifacts/allure-report/
+
+      - name: Upload raw test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-artifacts
+          if-no-files-found: warn
+          path: artifacts/
+
+      - name: Collect docker logs
+        if: always()
+        run: |
+          mkdir -p docker-logs
+          docker compose -f .github/docker-compose.e2e.yml ps > docker-logs/compose-ps.txt
+          docker compose -f .github/docker-compose.e2e.yml logs --no-color > docker-logs/compose.log
+
+      - name: Upload docker logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-logs
+          if-no-files-found: warn
+          path: docker-logs/
+
+      - name: Publish CI summary
+        if: always()
+        run: |
+          {
+            echo "## CI Report Summary"
+            echo
+            if [ "${{ steps.detect_allure_results.outputs.has_results }}" = "true" ]; then
+              echo "- Static Allure report artifact: [allure-html-report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload_allure_report.outputs.artifact-id }})"
+              echo "- Raw test artifacts uploaded as \`test-artifacts\`"
+              echo "- Application image: \`${API_IMAGE}\`"
+              echo "- Web image: \`${WEB_IMAGE}\`"
+            else
+              echo "- No Allure HTML report was generated in this workflow run."
+              echo "- The E2E workflow did not produce \`artifacts/allure-results\`."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Stop application stack
+        if: always()
+        run: docker compose -f .github/docker-compose.e2e.yml down -v
