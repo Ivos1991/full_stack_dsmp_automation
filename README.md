@@ -1,6 +1,6 @@
-# Cyera Full-Stack Automation
+# DSMP Full-Stack Automation
 
-Python automation framework for the Cyera Full-Stack Automation home assignment. The framework separates UI and API tests, reuses shared infrastructure across both layers, and keeps the code readable enough for interview discussion.
+Python automation framework for DSMP. The framework separates UI and API tests, reuses shared infrastructure across both layers, and keeps the code readable enough for interview discussion.
 
 ## Project Purpose
 
