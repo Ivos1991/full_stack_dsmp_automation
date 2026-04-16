@@ -150,6 +150,19 @@ Run headed with slow motion and open the generated report:
 powershell -ExecutionPolicy Bypass -File .\run-tests.ps1 -EvidenceMode always -Headed -SlowMoMs 1000 -PytestTarget tests\ui -PytestMarker ui -OpenReport
 ```
 
+## GitHub Actions
+
+- The `PR Checks` workflow runs on every push and pull request.
+- The same workflow also supports manual runs through `workflow_dispatch`.
+- Manual run inputs:
+  - `run_type`: `ui`, `api`, or `e2e`
+  - `workers`: number of pytest-xdist workers
+  - `evidence_mode`: `on_failure` or `always`
+- When the workflow produces Allure results, it:
+  - uploads the static Allure HTML report as an artifact
+  - deploys the latest report to GitHub Pages
+  - writes the Pages URL into the run summary
+
 ## Reporting
 
 - Runtime logs are written to `artifacts/logs/framework.log`

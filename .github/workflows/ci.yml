@@ -3,14 +3,47 @@ name: PR Checks
 on:
   push:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      run_type:
+        description: "Test scope to execute"
+        required: true
+        default: "e2e"
+        type: choice
+        options:
+          - ui
+          - api
+          - e2e
+      workers:
+        description: "Number of pytest workers"
+        required: true
+        default: "1"
+        type: choice
+        options:
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+      evidence_mode:
+        description: "Playwright evidence collection mode"
+        required: true
+        default: "on_failure"
+        type: choice
+        options:
+          - on_failure
+          - always
 
 permissions:
   contents: read
   packages: read
+  pages: write
+  id-token: write
 
 jobs:
-  e2e:
+  test-run:
     runs-on: ubuntu-latest
+    outputs:
+      has_allure_results: ${{ steps.detect_allure_results.outputs.has_results }}
     env:
       API_IMAGE: ${{ vars.API_IMAGE || 'ghcr.io/ivos1991/platform-home-assignment-api:assignment-one' }}
       WEB_IMAGE: ${{ vars.WEB_IMAGE || 'ghcr.io/ivos1991/platform-home-assignment-web:assignment-one' }}
@@ -18,11 +51,17 @@ jobs:
       API_BASE_URL: ${{ vars.API_BASE_URL || 'http://localhost:8080/api' }}
       APP_USERNAME: ${{ secrets.APP_USERNAME || 'admin' }}
       APP_PASSWORD: ${{ secrets.APP_PASSWORD || 'Aa123456' }}
-      BROWSER_EVIDENCE_MODE: ${{ vars.BROWSER_EVIDENCE_MODE || 'on_failure' }}
+      BROWSER_EVIDENCE_MODE: ${{ inputs.evidence_mode || vars.BROWSER_EVIDENCE_MODE || 'on_failure' }}
+      PYTEST_WORKERS: ${{ inputs.workers || '1' }}
+      RUN_TYPE: ${{ inputs.run_type || 'e2e' }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Configure Pages
+        if: always()
+        uses: actions/configure-pages@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -66,8 +105,26 @@ jobs:
           docker compose -f .github/docker-compose.e2e.yml logs
           exit 1
 
-      - name: Run end-to-end suite
-        run: python -m pytest -q -rs --alluredir artifacts/allure-results
+      - name: Choose pytest target
+        id: pytest_target
+        shell: bash
+        run: |
+          case "${RUN_TYPE}" in
+            ui)
+              echo "target=tests/ui -m ui" >> "$GITHUB_OUTPUT"
+              ;;
+            api)
+              echo "target=tests/api -m api" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "target=tests" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
+      - name: Run selected suite
+        shell: bash
+        run: |
+          python -m pytest ${{ steps.pytest_target.outputs.target }} -n "${PYTEST_WORKERS}" -q -rs --alluredir artifacts/allure-results
 
       - name: Detect Allure results
         if: always()
@@ -92,15 +149,21 @@ jobs:
         id: upload_allure_report
         uses: actions/upload-artifact@v4
         with:
-          name: allure-html-report
+          name: allure-html-report-${{ env.RUN_TYPE }}
           if-no-files-found: error
+          path: artifacts/allure-report/
+
+      - name: Upload Pages artifact
+        if: always() && steps.detect_allure_results.outputs.has_results == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
           path: artifacts/allure-report/
 
       - name: Upload raw test artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-artifacts
+          name: test-artifacts-${{ env.RUN_TYPE }}
           if-no-files-found: warn
           path: artifacts/
 
@@ -115,27 +178,69 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: docker-logs
+          name: docker-logs-${{ env.RUN_TYPE }}
           if-no-files-found: warn
           path: docker-logs/
-
-      - name: Publish CI summary
-        if: always()
-        run: |
-          {
-            echo "## CI Report Summary"
-            echo
-            if [ "${{ steps.detect_allure_results.outputs.has_results }}" = "true" ]; then
-              echo "- Static Allure report artifact: [allure-html-report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload_allure_report.outputs.artifact-id }})"
-              echo "- Raw test artifacts uploaded as \`test-artifacts\`"
-              echo "- Application image: \`${API_IMAGE}\`"
-              echo "- Web image: \`${WEB_IMAGE}\`"
-            else
-              echo "- No Allure HTML report was generated in this workflow run."
-              echo "- The E2E workflow did not produce \`artifacts/allure-results\`."
-            fi
-          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Stop application stack
         if: always()
         run: docker compose -f .github/docker-compose.e2e.yml down -v
+
+  deploy-report:
+    if: always() && needs.test-run.outputs.has_allure_results == 'true' && (github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main')
+    needs: test-run
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy_to_pages.outputs.page_url }}
+    steps:
+      - name: Deploy report to GitHub Pages
+        id: deploy_to_pages
+        uses: actions/deploy-pages@v4
+
+      - name: Publish CI summary
+        run: |
+          {
+            echo "## CI Report Summary"
+            echo
+            echo "- Run type: \`${{ github.event.inputs.run_type || 'e2e' }}\`"
+            echo "- Workers: \`${{ github.event.inputs.workers || '1' }}\`"
+            echo "- Evidence mode: \`${{ github.event.inputs.evidence_mode || vars.BROWSER_EVIDENCE_MODE || 'on_failure' }}\`"
+            echo "- Static Allure report artifact: [allure-html-report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)"
+            echo "- GitHub Pages report: ${{ steps.deploy_to_pages.outputs.page_url }}"
+            echo "- Application image: \`${{ vars.API_IMAGE || 'ghcr.io/ivos1991/platform-home-assignment-api:assignment-one' }}\`"
+            echo "- Web image: \`${{ vars.WEB_IMAGE || 'ghcr.io/ivos1991/platform-home-assignment-web:assignment-one' }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  publish-summary-no-report:
+    if: always() && needs.test-run.outputs.has_allure_results != 'true'
+    needs: test-run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish CI summary
+        run: |
+          {
+            echo "## CI Report Summary"
+            echo
+            echo "- Run type: \`${{ github.event.inputs.run_type || 'e2e' }}\`"
+            echo "- Workers: \`${{ github.event.inputs.workers || '1' }}\`"
+            echo "- Evidence mode: \`${{ github.event.inputs.evidence_mode || vars.BROWSER_EVIDENCE_MODE || 'on_failure' }}\`"
+            echo "- No Allure HTML report was generated in this workflow run."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  publish-summary-artifact-only:
+    if: always() && needs.test-run.outputs.has_allure_results == 'true' && !(github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main')
+    needs: test-run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish CI summary
+        run: |
+          {
+            echo "## CI Report Summary"
+            echo
+            echo "- Run type: \`${{ github.event.inputs.run_type || 'e2e' }}\`"
+            echo "- Workers: \`${{ github.event.inputs.workers || '1' }}\`"
+            echo "- Evidence mode: \`${{ github.event.inputs.evidence_mode || vars.BROWSER_EVIDENCE_MODE || 'on_failure' }}\`"
+            echo "- Static Allure report uploaded as a workflow artifact."
+            echo "- GitHub Pages deployment is skipped for pull request and non-main push runs."
+          } >> "$GITHUB_STEP_SUMMARY"
