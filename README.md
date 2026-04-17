@@ -190,6 +190,7 @@ allure open artifacts\allure-report
 ## Assumptions And Notes
 
 - The framework resets the environment before and after each test through `POST /api/admin/reset`.
+- The UI lifecycle test uses API setup to create deterministic alert preconditions, then validates the remediation flow through the web application.
 - The auto-remediation rescan verification scenario is intentionally marked as `xfail(strict=True)` because the application re-detects the alert on purpose.
 - The verified full-suite result is `2 passed, 1 xfailed`.
 - The UI shows `Awaiting User Verification` for the backend status `REMEDIATED_WAITING_FOR_CUSTOMER`, so the UI test verifies the backend state and the user-facing label separately.
