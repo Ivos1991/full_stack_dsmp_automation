@@ -1,0 +1,1 @@
+{"error":"Invalid status transition from OPEN to RESOLVED. Valid transitions: IN_PROGRESS"}

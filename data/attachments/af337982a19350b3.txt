@@ -1,0 +1,87 @@
+INFO     ScansApi:base_api.py:29 API POST http://localhost:8080/api/scans
+INFO     ScansApi:base_api.py:31 API POST http://localhost:8080/api/scans -> 201
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_621dcd05
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_621dcd05 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_621dcd05
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_621dcd05 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_621dcd05
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_621dcd05 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_621dcd05
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_621dcd05 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_621dcd05
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_621dcd05 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_621dcd05
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_621dcd05 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API PATCH http://localhost:8080/api/alerts/alert_46726ec2
+INFO     AlertsApi:base_api.py:31 API PATCH http://localhost:8080/api/alerts/alert_46726ec2 -> 200
+INFO     AlertsApi:base_api.py:29 API POST http://localhost:8080/api/alerts/alert_46726ec2/comments
+INFO     AlertsApi:base_api.py:31 API POST http://localhost:8080/api/alerts/alert_46726ec2/comments -> 201
+INFO     ScansApi:base_api.py:29 API POST http://localhost:8080/api/scans
+INFO     ScansApi:base_api.py:31 API POST http://localhost:8080/api/scans -> 201
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_b792ac15
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_b792ac15 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_b792ac15
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_b792ac15 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_b792ac15
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_b792ac15 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_b792ac15
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_b792ac15 -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_b792ac15
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_b792ac15 -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts -> 200
+INFO     tests:conftest.py:9 Reset API environment after test
+INFO     AdminApi:base_api.py:29 API POST http://localhost:8080/api/admin/reset
+INFO     AdminApi:base_api.py:31 API POST http://localhost:8080/api/admin/reset -> 200

@@ -1,0 +1,24 @@
+2026-04-17 15:27:38 INFO [tests] Reset API environment before test
+2026-04-17 15:27:38 INFO [AdminApi] API POST http://localhost:8080/api/admin/reset
+2026-04-17 15:27:38 INFO [AdminApi] API POST http://localhost:8080/api/admin/reset -> 200
+2026-04-17 15:27:38 INFO [ScansApi] API POST http://localhost:8080/api/scans
+2026-04-17 15:27:38 INFO [ScansApi] API POST http://localhost:8080/api/scans -> 201
+2026-04-17 15:27:38 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4
+2026-04-17 15:27:38 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4 -> 200
+2026-04-17 15:27:40 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4
+2026-04-17 15:27:40 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4 -> 200
+2026-04-17 15:27:42 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4
+2026-04-17 15:27:42 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4 -> 200
+2026-04-17 15:27:44 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4
+2026-04-17 15:27:44 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4 -> 200
+2026-04-17 15:27:46 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4
+2026-04-17 15:27:46 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4 -> 200
+2026-04-17 15:27:48 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4
+2026-04-17 15:27:48 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_3186acb4 -> 200
+2026-04-17 15:27:48 INFO [AlertsApi] API GET http://localhost:8080/api/alerts
+2026-04-17 15:27:48 INFO [AlertsApi] API GET http://localhost:8080/api/alerts -> 200
+2026-04-17 15:27:48 INFO [AlertsApi] API PATCH http://localhost:8080/api/alerts/alert_e9ad98c7
+2026-04-17 15:27:48 INFO [AlertsApi] API PATCH http://localhost:8080/api/alerts/alert_e9ad98c7 -> 400
+2026-04-17 15:27:48 INFO [tests] Reset API environment after test
+2026-04-17 15:27:48 INFO [AdminApi] API POST http://localhost:8080/api/admin/reset
+2026-04-17 15:27:48 INFO [AdminApi] API POST http://localhost:8080/api/admin/reset -> 200

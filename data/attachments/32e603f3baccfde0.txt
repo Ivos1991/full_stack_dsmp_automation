@@ -1,0 +1,63 @@
+2026-04-17 15:27:48 INFO [tests] Reset UI environment before test
+2026-04-17 15:27:48 INFO [AdminApi] API POST http://localhost:8080/api/admin/reset
+2026-04-17 15:27:48 INFO [AdminApi] API POST http://localhost:8080/api/admin/reset -> 200
+2026-04-17 15:27:49 INFO [LoginPage] UI expect visible: login page is visible
+2026-04-17 15:27:49 INFO [LoginPage] UI fill: username field
+2026-04-17 15:27:49 INFO [LoginPage] UI fill: password field
+2026-04-17 15:27:49 INFO [LoginPage] UI click: sign in button
+2026-04-17 15:27:49 INFO [ScansApi] API POST http://localhost:8080/api/scans
+2026-04-17 15:27:49 INFO [ScansApi] API POST http://localhost:8080/api/scans -> 201
+2026-04-17 15:27:49 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b
+2026-04-17 15:27:49 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+2026-04-17 15:27:51 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b
+2026-04-17 15:27:51 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+2026-04-17 15:27:53 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b
+2026-04-17 15:27:53 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+2026-04-17 15:27:55 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b
+2026-04-17 15:27:55 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+2026-04-17 15:27:57 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b
+2026-04-17 15:27:57 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+2026-04-17 15:27:59 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b
+2026-04-17 15:27:59 INFO [ScansApi] API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+2026-04-17 15:27:59 INFO [AlertsApi] API GET http://localhost:8080/api/alerts
+2026-04-17 15:27:59 INFO [AlertsApi] API GET http://localhost:8080/api/alerts -> 200
+2026-04-17 15:27:59 INFO [AlertsPage] UI expect visible: alerts page is visible
+2026-04-17 15:27:59 INFO [AlertsPage] UI expect visible: alerts table is visible
+2026-04-17 15:27:59 INFO [AlertsPage] UI fill: alert search input
+2026-04-17 15:27:59 INFO [AlertsPage] UI expect visible: first alert row after filtering by policy name Shadow IT Detection
+2026-04-17 15:27:59 INFO [AlertsPage] UI click: open first alert row after filtering by policy name Shadow IT Detection
+2026-04-17 15:27:59 INFO [AlertDetailsDrawer] UI expect visible: alert details drawer is visible
+2026-04-17 15:27:59 INFO [AlertDetailsDrawer] UI select option: select In Progress -> In Progress
+2026-04-17 15:27:59 INFO [AlertDetailsDrawer] UI select option: select Security Analyst -> Security Analyst
+2026-04-17 15:27:59 INFO [AlertDetailsDrawer] UI click: expand remediation section
+2026-04-17 15:27:59 INFO [AlertDetailsDrawer] UI expect visible: remediation note input is visible
+2026-04-17 15:27:59 INFO [AlertDetailsDrawer] UI fill: remediation note
+2026-04-17 15:27:59 INFO [AlertDetailsDrawer] UI click: remediate button
+2026-04-17 15:27:59 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:27:59 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:01 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:01 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:03 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:03 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:05 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:05 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:07 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:07 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:09 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:09 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:11 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:11 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:13 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:13 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:15 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:15 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:15 INFO [AlertDetailsDrawer] UI expect text: alert status becomes Awaiting User Verification
+2026-04-17 15:28:16 INFO [AlertDetailsDrawer] UI select option: select Resolved -> Resolved
+2026-04-17 15:28:16 INFO [AlertDetailsDrawer] UI fill: comment message
+2026-04-17 15:28:16 INFO [AlertDetailsDrawer] UI click: post comment button
+2026-04-17 15:28:16 INFO [AlertDetailsDrawer] UI expect visible: new comment is visible
+2026-04-17 15:28:16 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e
+2026-04-17 15:28:16 INFO [AlertsApi] API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+2026-04-17 15:28:16 INFO [tests] Reset UI environment after test
+2026-04-17 15:28:16 INFO [AdminApi] API POST http://localhost:8080/api/admin/reset
+2026-04-17 15:28:16 INFO [AdminApi] API POST http://localhost:8080/api/admin/reset -> 200

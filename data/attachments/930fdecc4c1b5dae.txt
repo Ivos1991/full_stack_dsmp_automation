@@ -1,0 +1,63 @@
+INFO     tests:conftest.py:10 Reset UI environment before test
+INFO     AdminApi:base_api.py:29 API POST http://localhost:8080/api/admin/reset
+INFO     AdminApi:base_api.py:31 API POST http://localhost:8080/api/admin/reset -> 200
+INFO     LoginPage:playwright_actions.py:19 UI expect visible: login page is visible
+INFO     LoginPage:playwright_actions.py:11 UI fill: username field
+INFO     LoginPage:playwright_actions.py:11 UI fill: password field
+INFO     LoginPage:playwright_actions.py:15 UI click: sign in button
+INFO     ScansApi:base_api.py:29 API POST http://localhost:8080/api/scans
+INFO     ScansApi:base_api.py:31 API POST http://localhost:8080/api/scans -> 201
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_f50b861b
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_f50b861b
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_f50b861b
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_f50b861b
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_f50b861b
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+INFO     ScansApi:base_api.py:29 API GET http://localhost:8080/api/scans/scan_f50b861b
+INFO     ScansApi:base_api.py:31 API GET http://localhost:8080/api/scans/scan_f50b861b -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts -> 200
+INFO     AlertsPage:playwright_actions.py:19 UI expect visible: alerts page is visible
+INFO     AlertsPage:playwright_actions.py:19 UI expect visible: alerts table is visible
+INFO     AlertsPage:playwright_actions.py:11 UI fill: alert search input
+INFO     AlertsPage:playwright_actions.py:19 UI expect visible: first alert row after filtering by policy name Shadow IT Detection
+INFO     AlertsPage:playwright_actions.py:15 UI click: open first alert row after filtering by policy name Shadow IT Detection
+INFO     AlertDetailsDrawer:playwright_actions.py:19 UI expect visible: alert details drawer is visible
+INFO     AlertDetailsDrawer:playwright_actions.py:27 UI select option: select In Progress -> In Progress
+INFO     AlertDetailsDrawer:playwright_actions.py:27 UI select option: select Security Analyst -> Security Analyst
+INFO     AlertDetailsDrawer:playwright_actions.py:15 UI click: expand remediation section
+INFO     AlertDetailsDrawer:playwright_actions.py:19 UI expect visible: remediation note input is visible
+INFO     AlertDetailsDrawer:playwright_actions.py:11 UI fill: remediation note
+INFO     AlertDetailsDrawer:playwright_actions.py:15 UI click: remediate button
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     AlertDetailsDrawer:playwright_actions.py:23 UI expect text: alert status becomes Awaiting User Verification
+INFO     AlertDetailsDrawer:playwright_actions.py:27 UI select option: select Resolved -> Resolved
+INFO     AlertDetailsDrawer:playwright_actions.py:11 UI fill: comment message
+INFO     AlertDetailsDrawer:playwright_actions.py:15 UI click: post comment button
+INFO     AlertDetailsDrawer:playwright_actions.py:19 UI expect visible: new comment is visible
+INFO     AlertsApi:base_api.py:29 API GET http://localhost:8080/api/alerts/alert_a9c9043e
+INFO     AlertsApi:base_api.py:31 API GET http://localhost:8080/api/alerts/alert_a9c9043e -> 200
+INFO     tests:conftest.py:13 Reset UI environment after test
+INFO     AdminApi:base_api.py:29 API POST http://localhost:8080/api/admin/reset
+INFO     AdminApi:base_api.py:31 API POST http://localhost:8080/api/admin/reset -> 200

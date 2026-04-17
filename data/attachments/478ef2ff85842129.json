@@ -1,0 +1,115 @@
+{
+  "accountId": "gcp-account-de8v",
+  "asset": {
+    "id": "gcp-cloudsql-sp8crk",
+    "location": "GCP/us-central1/app-db-r8fyue",
+    "metadata": {
+      "name": "app-db-r8fyue",
+      "provider": "GCP",
+      "saasTool": null
+    },
+    "type": "CLOUDSQL"
+  },
+  "assetCategory": "CLOUD",
+  "assetDisplayName": "app-db-r8fyue",
+  "assetId": "gcp-cloudsql-sp8crk",
+  "assetLocation": "GCP/us-central1/app-db-r8fyue",
+  "assignedTo": null,
+  "canRemediate": false,
+  "cloudProvider": "GCP",
+  "comments": [],
+  "createdAt": "2026-04-17T15:26:40.124Z",
+  "createdSeverity": "HIGH",
+  "dataStoreType": "CLOUDSQL",
+  "description": "Unencrypted data found in CLOUDSQL \"app-db-r8fyue\". TLS/SSL encryption required.",
+  "evidence": {
+    "assetContext": {
+      "accountId": "gcp-account-de8v",
+      "category": "CLOUD",
+      "cloudProvider": "GCP",
+      "dataStoreType": "CLOUDSQL",
+      "location": "GCP/us-central1/app-db-r8fyue",
+      "saasTool": null
+    },
+    "assetDisplayName": "app-db-r8fyue",
+    "assetId": "gcp-cloudsql-sp8crk",
+    "detectedAt": "2026-04-17T15:26:40.124Z",
+    "findings": {
+      "matchedByType": {
+        "csv": 20,
+        "json": 2
+      },
+      "matchedObjectsCount": 22,
+      "sampleItems": [
+        "app-db-r8fyue/data_acrx9r.parquet",
+        "app-db-r8fyue/data_3f9oia.parquet",
+        "app-db-r8fyue/report_jnvm5h.json",
+        "app-db-r8fyue/export_ej5kac.xlsx",
+        "app-db-r8fyue/data_wu7fuk.csv"
+      ],
+      "scannedObjectsCount": 530
+    },
+    "policyId": "policy_002",
+    "policyName": "Unencrypted Database Connections",
+    "riskScore": 93,
+    "violationType": "UNENCRYPTED_DATA"
+  },
+  "id": "alert_46726ec2",
+  "policyId": "policy_002",
+  "policyName": "Unencrypted Database Connections",
+  "policySnapshot": {
+    "autoRemediate": true,
+    "remediationDue": {
+      "unit": "HOURS",
+      "value": 48
+    },
+    "remediationPriority": "HIGH",
+    "remediationType": "ENABLE_ENCRYPTION",
+    "supportedAssets": {
+      "assetCategory": "CLOUD",
+      "cloudProviders": [
+        {
+          "dataStores": [
+            "RDS",
+            "DYNAMODB"
+          ],
+          "provider": "AWS"
+        },
+        {
+          "dataStores": [
+            "CLOUDSQL",
+            "BIGQUERY"
+          ],
+          "provider": "GCP"
+        },
+        {
+          "dataStores": [
+            "SQL_DATABASE",
+            "COSMOS_DB"
+          ],
+          "provider": "AZURE"
+        }
+      ]
+    },
+    "violationType": "UNENCRYPTED_DATA"
+  },
+  "remediation": {
+    "autoRemediate": true,
+    "dueDate": "2026-04-19T15:26:40.124Z",
+    "note": "Auto-remediated by policy configuration",
+    "priority": "HIGH",
+    "type": "ENABLE_ENCRYPTION"
+  },
+  "remediationOrigin": "AUTO",
+  "runId": "scan_621dcd05",
+  "saasTool": null,
+  "severity": "HIGH",
+  "status": "RESOLVED",
+  "statusUpdatedAt": "2026-04-17T15:27:30.161Z",
+  "updatedAt": "2026-04-17T15:27:30.161Z",
+  "validTransitions": [
+    "REOPEN"
+  ],
+  "violationType": "UNENCRYPTED_DATA",
+  "wasRemediated": true
+}
